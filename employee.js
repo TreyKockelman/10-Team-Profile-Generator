@@ -1,44 +1,26 @@
-const { default: inquirer } = require("inquirer");
+const inquirer = require("inquirer");
 
 class Employee {
-  // Just like constructor functions, classes can accept arguments
-  constructor(name, id, email) {
-    this.name = name;
+  constructor(id, name, emailAddress) {
     this.id = id;
-    this.email = email;
+    this.name = name;
+    this.email = emailAddress;
+  }
+
+  getID() {
+    return this.id;
   }
 
   getName() {
-    inquirer.prompt({
-      type: 'input',
-      message: 'Please Insert Name',
-      name: 'name',
-    })
+    return this.name;
   };
 
-  getID() {
-    inquirer.prompt({
-      type: 'input',
-      message: 'Please Insert Employee ID',
-      name: 'id',
-    })
-  }
-
   getEmail() {
-    inquirer.prompt({
-      type: 'input',
-      message: 'Please Insert Employee Email',
-      name: 'email',
-    })
+    return this.email;
   }
 
   getRole() {
-    inquirer.prompt({
-      type: 'list',
-      message: 'Please Select Employee Role',
-      name: 'role',
-      choices: ['Manager', 'Engineer', 'Intern']
-    })
+    return 'Employee';
   }
 };
 
