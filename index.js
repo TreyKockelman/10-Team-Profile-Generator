@@ -4,6 +4,16 @@ const Engineer = require('./engineer');
 const Intern = require('./intern');
 const inquirer = require("inquirer");
 
+function appendElements() {
+  var parentEl = classes;
+  var cardsDate = $("<h3 class=card-header>").text();
+  var cardsTemp = $("<p>").text();
+  var cardsWind = $("<p>").text();
+  var cardsHum = $("<p>").text();
+  parentEl.append(cardsDate, cardsIcon, cardsTemp, cardsWind, cardsHum);
+  $('.card-container').append(parentEl);
+}
+
 async function init() {
   let employee;
   let manager;
