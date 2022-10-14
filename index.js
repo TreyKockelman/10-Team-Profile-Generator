@@ -2,6 +2,7 @@ const Manager = require('./manager');
 const Engineer = require('./engineer');
 const Intern = require('./intern');
 const inquirer = require("inquirer");
+const fs = require("fs");
 
 const questions = {
   employee: [
@@ -75,10 +76,10 @@ async function init() {
       break;
     }
   };
-  createCards(data);
+  collectEmployeeInfo(data);
 };
 
-function createCards(data) {
+function collectEmployeeInfo(data) {
   let employee;
   let empArray = [];
   for(const item of data) {
@@ -94,6 +95,62 @@ function createCards(data) {
     empArray.push(employee)
   }
   console.log(empArray)
+  createCards(empArray)
+}
+
+function createCards(infoArray) {
+  let cardArr = [];
+  for (var i = 0; i < infoArray.length; i++) {
+    let role = infoArray[i].getRole()
+    let name = infoArray[i].name 
+    let id = infoArray[i].id
+    let email = infoArray[i].email
+    let temp;
+    if (role === 'Manager') {
+      temp = "Manager Office Number: " + infoArray[i].getOffNumber()
+    }
+    if (role === 'Intern') {
+      temp = "Intern School: " + infoArray[i].getSchoolName()
+    }
+    if (role === 'Engineer') {
+      temp = "Engineer Github: " + infoArray[i].getGithubName()
+    }
+    cardArr.push( 
+    `<card>
+      <h1>${name} : ${role}</h1>
+      <p>Employee ID: ${id}</p>
+      <p>Employee Email: ${email}</p>
+      <p>${temp}</p>
+    </card>`)
+  }
+  generateHTML(cardArr);
+}
+
+function generateHTML(cardArr) {
+  let html = `<!DOCTYPE html>
+  <html lang="en">
+    <head>
+      <meta charset="UTF-8" />
+      <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+      <meta http-equiv="X-UA-Compatible" content="ie=edge" />
+      <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
+      <link rel="stylesheet" href="./assets/css/style.css" />
+      <title>Team Generator</title>
+    </head>
+  
+    <body>
+  
+      <header class="header">
+        <h1>Team Generator</h1>
+      </header>
+  
+      <div class="container-fluid">
+        ${[...cardArr].join("\n")}
+      </div>
+  
+    </body>
+  </html>`
+  fs.writeFileSync("index.html", html)
 }
 
 init();
