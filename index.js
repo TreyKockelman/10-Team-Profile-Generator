@@ -62,11 +62,13 @@ async function init() {
           employeeInfo = await inquirer.prompt(questions.employee);
           temp = await inquirer.prompt(questions.engineer);
           obj = {...employeeInfo, ...temp, role: 'Engineer'};
+          console.log("Engineer logged successfully")
           break;
         case "Intern": 
           employeeInfo = await inquirer.prompt(questions.employee);
           temp = await inquirer.prompt(questions.intern);
           obj = {...employeeInfo, ...temp, role: 'Intern'};
+          console.log("Intern logged successfully")
           break;
         default: console.log("defaulted");
           run = false;
@@ -113,7 +115,7 @@ function createCards(infoArray) {
       temp = "Intern School: " + infoArray[i].getSchoolName()
     }
     if (role === 'Engineer') {
-      temp = "Engineer Github: " + "<a href=https://github.com/" + infoArray[i].getGithubName() + ">" + infoArray[i].getGithubName() + "</a>"
+      temp = "Engineer Github: " + "<a href=https://github.com/" + infoArray[i].getGithubName() + " target=_blank>" + infoArray[i].getGithubName() + "</a>"
     }
     cardArr.push( 
     `<card>
