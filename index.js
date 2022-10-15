@@ -113,13 +113,13 @@ function createCards(infoArray) {
       temp = "Intern School: " + infoArray[i].getSchoolName()
     }
     if (role === 'Engineer') {
-      temp = "Engineer Github: " + infoArray[i].getGithubName()
+      temp = "Engineer Github: " + "<a href=https://github.com/" + infoArray[i].getGithubName() + ">" + infoArray[i].getGithubName() + "</a>"
     }
     cardArr.push( 
     `<card>
-      <h1>${name} : ${role}</h1>
+      <h1>${name}: ${role}</h1>
       <p>Employee ID: ${id}</p>
-      <p>Employee Email: ${email}</p>
+      <p>Employee Email: <a href=mailto:${email}>${email}</a></p>
       <p>${temp}</p>
     </card>`)
   }
@@ -134,7 +134,7 @@ function generateHTML(cardArr) {
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
       <meta http-equiv="X-UA-Compatible" content="ie=edge" />
       <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" />
-      <link rel="stylesheet" href="./assets/css/style.css" />
+      <link rel="stylesheet" href="./assets/style.css" />
       <title>Team Generator</title>
     </head>
   
